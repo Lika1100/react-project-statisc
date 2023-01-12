@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { WeeksGrid } from "./components/WeeksGrid";
+import './Nav.css'
+import { TableIndicators } from "./components/TableIndicators";
+import { useState } from "react";
+import { WeeksPage } from "./components/WeeksPage";
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Routes,
+} from "react-router-dom";
+import { GraphicByWeeks } from "./components/GraphicByWeeks";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link className="Nav" to='/'>Главная</Link>
+          </li>
+          <li>
+            <Link className="Nav" to='/table'>Таблица</Link>
+          </li>
+          <li>
+            <Link className="Nav" to='/graphic'>График</Link>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <Routes>
+          <Route path='/graphic' element={<WeeksPage />}>
+          </Route>
+          <Route path='/table' element={<TableIndicators />}>
+          </Route>
+          {/* 50vw */}
+          <Route path='/' element={<GraphicByWeeks width={1280} height={250} />}>
+          </Route>
+        </Routes>
+      </div>
+    </Router>
   );
 }
+
 
 export default App;
